@@ -1,0 +1,178 @@
+@import url("https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Comic Neue", cursive;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f2f0f1;
+  color: #252125;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 25px;
+}
+
+header {
+  top: 0;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+
+.container {
+  width: 100%;
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+  color: #929ca0;
+}
+
+.buttons div {
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  -webkit-text-stroke-color: #252125;
+}
+
+.buttons div:hover i {
+  -webkit-text-stroke-width: 4px;
+}
+
+.buttons div:hover p {
+  color: #252125;
+}
+
+i {
+  font-size: 300px;
+}
+
+.counter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-weight: 600;
+}
+
+/* Footer */
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  bottom: 0;
+  text-align: center;
+  height: 30px;
+}
+
+footer p {
+  padding: 0 50px;
+  font-size: 17px;
+}
+
+footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+/* Footer */
+
+/* Modal */
+.modal {
+  display: none; /* Hidden by default */
+  align-items: center; /* Center vertically*/
+  justify-content: center; /* Center horizontally*/
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100vw; /* Full width */
+  height: 100vh; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #f2f0f1;
+  border: 1px solid #252125;
+  width: 80%; /* Could be more or less, depending on screen size */
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.modal-inner {
+  height: 100%;
+}
+
+.modal-buttons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.modal-button {
+  outline: none;
+  border: none;
+  transition: 0.1s all;
+  background-color: transparent;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.modal-button:hover {
+  transform: scale(1.1);
+}
+
+#end-message {
+  font-size: 2em;
+}
+/* Modal */
+
+/* Media Queries */
+@media screen and (min-width: 3840px) {
+  body {
+    font-size: 70px;
+  }
+
+  header {
+    height: 300px;
+    font-size: 50px;
+  }
+
+  i {
+    font-size: 600px;
+  }
+
+  #end-message {
+    font-size: 70px;
+  }
+
+  footer p {
+    font-size: 50px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .buttons {
+    flex-direction: column;
+  }
+}
