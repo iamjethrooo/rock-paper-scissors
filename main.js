@@ -1,110 +1,130 @@
-function init() {
-  new Game(5);
+let round = 0;
+let playerScore = 0;
+let computerScore = 0;
+let draws = 0;
+
+const ROUND_NUMBER = document.querySelector("#round-number");
+const PLAYER_SCORE = document.querySelector("#player-score");
+const COMPUTER_SCORE = document.querySelector("#computer-score");
+const DRAW_COUNT = document.querySelector("#draws");
+
+function move(id) {
+  switch (id) {
+    case 1:
+      return "rock";
+    case 2:
+      return "paper";
+    case 3:
+      return "scissors";
+  }
 }
 
-class Game {
-  constructor(rounds) {
-    this.playerScore = 0;
-    this.aiScore = 0;
-    this.draws = 0;
-    this.start(rounds);
+function check(playerMove, computerMove) {
+  round++;
+  if (playerMove == computerMove) {
+    draws++;
+    return;
   }
-
-  start(rounds) {
-    for (let i = 0; i < rounds; i++) {
-      let playerMove = this.movePlayer();
-      let aiMove = this.moveAI();
-      console.log(`Round ${i + 1}`);
-      console.log(`Player move: ${playerMove}`);
-      console.log(`AI move:  ${aiMove}`);
-      this.updateScore(playerMove, aiMove);
-    }
-    this.tally();
-  }
-
-  movePlayer() {
-    let playerMove = prompt("It's your turn! Rock, paper, or scissors?");
-    playerMove = playerMove.toLowerCase();
-    if (
-      playerMove != "rock" &&
-      playerMove != "paper" &&
-      playerMove != "scissors"
-    ) {
-      alert("Invalid input!");
-      this.movePlayer();
+  if (playerMove == "rock") {
+    if (computerMove == "paper") {
+      computerScore++;
     } else {
-      return playerMove;
+      playerScore++;
     }
+    return; // scissors
   }
 
-  moveAI() {
-    let aiMove;
+  if (playerMove == "paper") {
+    if (computerMove == "rock") {
+      playerScore++;
+    } else {
+      computerScore++;
+    } // scissors
+    return;
+  }
+
+  if (playerMove == "scissors") {
+    if (computerMove == "rock") {
+      computerScore++;
+    } else {
+      playerScore++;
+    } // paper
+    return;
+  }
+}
+
+function update() {
+  ROUND_NUMBER.textContent = round;
+  PLAYER_SCORE.textContent = playerScore;
+  COMPUTER_SCORE.textContent = computerScore;
+  DRAW_COUNT.textContent = draws;
+  if (round == 5) {
+    showEndScreen();
+  }
+}
+
+const BUTTONS = document.querySelectorAll(".button");
+let playerMove;
+
+// add
+BUTTONS.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    // player move
+    let buttonId = parseInt(e.target.getAttribute("data-id"));
+    playerMove = move(buttonId);
+
+    // computer move
+    // generates a random number from 1 to 3
     let guess = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
-    switch (guess) {
-      case 1:
-        aiMove = "rock";
-        break;
-      case 2:
-        aiMove = "paper";
-        break;
-      case 3:
-        aiMove = "scissors";
-        break;
-      default:
-        alert("Error!");
-        return;
-    }
-    return aiMove;
-  }
+    computerMove = move(guess);
 
-  updateScore(playerMove, aiMove) {
-    console.log(playerMove + "" + aiMove);
-    if (playerMove == aiMove) {
-      this.draws++;
-      return;
-    }
-    if (playerMove == "rock") {
-      if (aiMove == "paper") {
-        this.aiScore++;
-      } else {
-        this.playerScore++;
-      }
-      return; // scissors
-    }
+    // method to check who won
+    check(playerMove, computerMove);
+    update();
+  });
+});
 
-    if (playerMove == "paper") {
-      if (aiMove == "rock") {
-        this.playerScore++;
-      } else {
-        this.aiScore++;
-      } // scissors
-      return;
-    }
-
-    if (playerMove == "scissors") {
-      if (aiMove == "rock") {
-        this.aiScore++;
-      } else {
-        this.playerScore++;
-      } // paper
-      return;
-    }
-  }
-
-  tally() {
-    let message;
-    if (this.playerScore > this.aiScore) {
-      message = "You won! :)";
-    } else if (this.playerScore < this.aiScore) {
-      message = "You lost :(";
-    } else {
-      message = "It's a draw!";
-    }
-    alert(message);
-    alert(
-      `Your score: ${this.playerScore} AI's score: ${this.aiScore} Draws: ${this.draws}`
-    );
-  }
+function init() {
+  ROUND_NUMBER.textContent = round;
+  PLAYER_SCORE.textContent = playerScore;
+  COMPUTER_SCORE.textContent = computerScore;
+  DRAW_COUNT.textContent = draws;
 }
 
-init();
+document.addEventListener("load", init());
+
+// Modal
+
+const MODAL = document.querySelector("#modal");
+const END_MESSAGE = document.querySelector("#end-message");
+const PLAY_AGAIN = document.querySelector("#play-again-button");
+const CONTINUE = document.querySelector("#continue-button");
+
+function reset() {
+  round = 0;
+  playerScore = 0;
+  computerScore = 0;
+  draws = 0;
+  update();
+}
+
+function showEndScreen() {
+  let endMessage;
+  if (playerScore > computerScore) {
+    endMessage = "Congratulations! You win!";
+  } else if (playerScore < computerScore) {
+    endMessage = "You lose.";
+  } else {
+    endMessage = "It's a draw!";
+  }
+  END_MESSAGE.textContent = endMessage;
+  MODAL.style.display = "flex";
+}
+
+PLAY_AGAIN.addEventListener("click", () => {
+  MODAL.style.display = "none";
+});
+
+CONTINUE.addEventListener("click", () => {
+  MODAL.style.display = "none";
+});
