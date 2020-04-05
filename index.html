@@ -3,9 +3,57 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
+    <script
+      src="https://kit.fontawesome.com/30beb5b11e.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <header>
+      <h1>Rock Paper Scissors</h1>
+    </header>
+    <div class="container">
+      <p id="round-counter">Round: <span id="round-number"></span></p>
+    </div>
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <p id="end-message"></p>
+        <div class="modal-buttons">
+          <button class="modal-button" id="play-again-button">
+            Play Again
+          </button>
+          <button class="modal-button" id="continue-button">Continue</button>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="buttons">
+        <div class="button">
+          <i class="fas fa-hand-rock" data-id="1"></i>
+          <p>Rock</p>
+        </div>
+        <div class="button">
+          <i class="fas fa-hand-paper" data-id="2"></i>
+          <p>Paper</p>
+        </div>
+        <div class="button">
+          <i class="fas fa-hand-scissors" data-id="3"></i>
+          <p>Scissors</p>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="counter">
+        <p>Player Score: <span id="player-score"></span></p>
+        <p>Computer Score: <span id="computer-score"></span></p>
+        <p>Draws: <span id="draws"></span></p>
+      </div>
+    </div>
+    <footer>
+      <p>&copy;Jethro Estangki 2020</p>
+      <p><a id="source-code" href="http://">source code</a></p>
+    </footer>
     <script src="main.js"></script>
   </body>
 </html>
