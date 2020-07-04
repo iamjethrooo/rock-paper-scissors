@@ -9,6 +9,5 @@ I used Visual Studio Code for the code.<br>
 Icons from [Font Awesome](https://fontawesome.com/)
 
 ## To-do
-* <strong>DONE</strong> <strike>If I ever go back to this project in the future, I would like to add a GUI and rewrite the code to something cleaner and more efficient.</strike>
 * Make responsive
 * Add multiplayer
